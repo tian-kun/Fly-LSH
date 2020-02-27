@@ -36,7 +36,7 @@ def flylsh(data, hash_len, sampling_r, embed_size):
 
 def convlsh(data, hash_len):
     '''
-    Conventional LSH 
+    Conventional LSH
     :return: LSH
     '''
 
@@ -57,7 +57,7 @@ def query(qidx, n_nn, fly_lsh):
 
     return NNs
 
-def true_nns(qidx, n_nn, data):    # Q: should this data be x or divisive normalized data?
+def true_nns(qidx, n_nn, data):    
     sample = data[qidx, :]
     tnns = np.sum((data - sample) ** 2, axis=1).argsort()[:n_nn + 1]
     tnns = tnns[(tnns != qidx)]
@@ -76,7 +76,7 @@ def construct_true_nns(sample_idx, n_nn, data):
     return all_NNs
 
 def AP(predictions, truth, fly_lsh):
-    ''' 
+    '''
     :return: average precision
     '''
     assert len(predictions) == len(truth) or len(predictions) == fly_lsh.shape[0]
@@ -183,4 +183,3 @@ if __name__ == '__main__':
     # plot
     colors = {'Fly':'blue', 'Conv':'red'}
     plt_mAP(all_mAPs, colors)                           # Part I results
-
